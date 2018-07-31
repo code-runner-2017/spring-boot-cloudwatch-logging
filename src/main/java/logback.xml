@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    
+	<appender name="CLOUDWATCH" class="com.j256.cloudwatchlogbackappender.CloudWatchAppender">
+        <accessKeyId>YOUR ACCESS KEY</accessKeyId>
+        <secretKey>YOUR SECRET KEY</secretKey>
+	    <region>eu-west-1</region>
+	    <logGroup>spring-boot-log</logGroup>
+	    <logStream>pietro-stream</logStream>
+	    <layout>
+	        <!-- possible layout pattern -->
+	        <pattern>%d{HH:mm:ss.SSS} %-5level %logger{16} - %msg%n</pattern>
+	    </layout>
+	</appender>
+	
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <!-- encoders are assigned the type
+         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+	    <encoder>
+	      <pattern>x %d{HH:mm:ss.SSS} %-5level %logger{16} - %msg%n</pattern>
+	    </encoder>
+  </appender>
+
+  <root level="INFO">          
+    <appender-ref ref="CLOUDWATCH" />
+  </root>  
+  
+<!--   <logger name="com.example" level="WARN"> -->
+<!--        <appender-ref ref="STDOUT" /> -->
+<!--   </logger> -->
+</configuration>
